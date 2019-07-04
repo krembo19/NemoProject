@@ -23,7 +23,7 @@ MongoClient.connect(dbURL, (err, database) => {
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/', (req, res) => {
-  const index = path.join(__dirname, 'build', 'index.html');
+  const index = path.join(__dirname, 'index.html');
     res.sendFile(index);
     // Note: __dirname is directory that contains the JavaScript source code. Try logging it and see what you get!
     // Mine was '/Users/zellwk/Projects/demo-repos/crud-express-mongo' for this app.
