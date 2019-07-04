@@ -4,13 +4,17 @@ const express = require('express');
 const bodyParser= require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const app = express();
+const dbURL = "mongodb://heroku_gkktb1k2:qn6smi3o6nt6vcjc37u88t5im@ds247637.mlab.com:47637/heroku_gkktb1k2";
+let port = process.env.PORT;
 
-const PORT = 3000;
-
-MongoClient.connect('link-to-mongodb', (err, database) => {
+if (port == null || port == "") {
+  port = 3000;
+}
+console.log(port);
+MongoClient.connect(dbURL, (err, database) => {
   // ... start the server
-  app.listen(3000, function() {
-    console.log('listening on '+PORT);
+  app.listen(port, function() {
+    console.log('listening on '+ port);
   }); 
 
 });
