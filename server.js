@@ -20,6 +20,7 @@ else {
 mongoose.connect(dbString);
 //app.use(cors());
 app.use(bodyParser());
+app.use('/ui5', express.static(path.join(__dirname, 'webapp')));
 app.use(bodyParser.urlencoded({ extended: true }))
 var Product = mongoose.model("products", {
   name: String
