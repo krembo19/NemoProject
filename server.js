@@ -1,54 +1,53 @@
-// console.log('May Node be with you'); 
-'use strict';
-const express = require('express');
-const bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
-const path = require('path');
-const app = express();
-const dbURL = "mongodb://heroku_gkktb1k2:qn6smi3o6nt6vcjc37u88t5im@ds247637.mlab.com:47637/heroku_gkktb1k2";
-let port = process.env.PORT;
-let dbString = "mongodb://localhost/crm"
-var db;
+var express = require("express");
+var app = express();
+//var cors = require("cors");
+var bodyParser = require("body-parser");
 
-if (port == null || port == "") {
-  port = 3000;
-}
-else {
-  dbString = dbURL;
-}
-
-MongoClient.connect(dbString, (err, database) => {
-  // ... start the server
-  if (err) return console.log(err);
-  db = database.db('crm');
-
-  app.listen(port, function () {
-    console.log('running with db' + dbString);
-    console.log('listening on ' + port);
-  });
-
+var mongoose = require("mongoose");
+mongoose.connect("mongodb://localhost/ui5con");
+//app.use(cors());
+app.use(bodyParser());
+var Product = mongoose.model("products", {
+  name: String
 });
 
-app.use(bodyParser.urlencoded({ extended: true }))
+/*
+var product = new Product({name:"UI5Con"});
+product.save(function(err){
+  if (err){
+    console.log("error");
+  }else {
+    console.log("saved");
+  }
+});
+*/
+
+app.get("/products", function(req, res){
+  Product.find(function(err, products){
+    res.send({data: products});
+  })
+})
+
+app.post("/products", function(req, res){
+ // console.log(req);
+  console.log(req.body);
+  var name = req.body.name;
+
+  var product = new Product ({name: name});
+  product.save(function(err){
+    if(err){
+      console.log("failed");
+    } else {
+      console.log("saved");
+      res.json({msg: "Product saved"});
+      res.status(201);
+      res.send();
+
+    }
+
+  })
+})
+
+app.listen(3000);
+
 app.use(express.static(__dirname));
-
-app.get('/', (req, res) => {
-   const index = path.join(__dirname, 'index.html');
-   res.sendFile(index);
-  // Note: __dirname is directory that contains the JavaScript source code. Try logging it and see what you get!
-  // Mine was '/Users/zellwk/Projects/demo-repos/crud-express-mongo' for this app.
-});
-
-app.get('/customer', (req, res) => {
-  var cursor = db.collection('customer').find().toArray(function(err, results) {
-    res.send(results);
-  })
-});
-
-app.post('/customer', (req, res) => {
-  db.collection('customer').save(req.body, (err, result) => {
-    if (err) return console.log(err)
-    console.log('saved to database')
-    res.redirect('/')
-  })
-});

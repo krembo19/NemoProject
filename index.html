@@ -1,23 +1,32 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html>
-   <head>  
-      <meta http-equiv='X-UA-Compatible' content='IE=edge' />  
-      <title>Hello World</title>  
-  
-      <script id='sap-ui-bootstrap' 
-           src='https://openui5.hana.ondemand.com/resources/sap-ui-core.js'  
-           data-sap-ui-theme='sap_belize'  
-           data-sap-ui-libs='sap.m'></script>   
-  
-      <script>  
-         var btn = new sap.m.Button({  
-            text:'Hello World',  
-            press:function(){alert('Hello!');}  
-         });  
-         btn.placeAt('content');  
-      </script>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Stobag_Lead_Cre</title>
+		<script id="sap-ui-bootstrap"
+			src="../../resources/sap-ui-core.js"
+			data-sap-ui-async="true"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_belize"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-resourceroots='{"stobag_lead_cre.Stobag_Lead_Cre": "./"}'>
+		</script>
+			<link rel="stylesheet" type="text/css" href="css/style.css">
 
-   </head>
-   <body id='content' class='sapUiBody'>
-   </body>
+		<script>
+			sap.ui.getCore().attachInit(function() {
+				new sap.m.Shell({
+					appWidthLimited : false,
+					app: new sap.ui.core.ComponentContainer({
+						width :"100%",
+						name : "stobag_lead_cre.Stobag_Lead_Cre"
+					})
+				}).placeAt("content");
+			});
+		</script>
+	</head>
+
+	<body class="sapUiBody" id="content">
+	</body>
 </html>
