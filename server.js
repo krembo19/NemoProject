@@ -1,76 +1,51 @@
-var express = require("express");
+var path = require('path'), express = require('express');
+var qs = require('querystring');
 var app = express();
-const path = require('path');
-//var cors = require("cors");
-var bodyParser = require("body-parser");
-
-var mongoose = require("mongoose");
-const dbURL = "mongodb://heroku_gkktb1k2:qn6smi3o6nt6vcjc37u88t5im@ds247637.mlab.com:47637/heroku_gkktb1k2";
-let port = process.env.PORT;
-var db;
-var dbString = "mongodb://localhost/ui5con";
-
-if (port == null || port == "") {
-  port = 3000;
-}
-else {
-  dbString = dbURL;
-}
-
-mongoose.connect(dbString);
-//app.use(cors());
-app.use(bodyParser());
 app.use('/ui5', express.static(path.join(__dirname, 'webapp')));
-app.use(bodyParser.urlencoded({ extended: true }))
-var Product = mongoose.model("products", {
-  name: String
-});
-/*
-var product = new Product({name:"UI5Con"});
-product.save(function(err){
-  if (err){
-    console.log("error");
-  }else {
-    console.log("saved");
-  }
-});
-*/
-
-
-app.get('/', (req, res) => {
-   const index = path.join(__dirname, 'index.html');
-   res.sendFile(index);
-  // Note: __dirname is directory that contains the JavaScript source code. Try logging it and see what you get!
-  // Mine was '/Users/zellwk/Projects/demo-repos/crud-express-mongo' for this app.
+app.use('/wt', express.static(path.join(__dirname, 'walkthrough')));
+app.use('/mindmap', express.static(path.join(__dirname, 'mindmap')));
+app.use('/module', express.static(path.join(__dirname, 'module')));
+app.get('/', function(req, res){
+	console.log("method in get/: " + req.method);
+    var qs = require('querystring');
+   res.send("Hello World");
 });
 
+app.post("/", function(req, res){
+	var body = '';
+	const regex = /!\[(.*?)\]\((.*?)\)/g;
+	var m;
+	var printResult = ( array ) => {
+		var aResult = [];
+    	var url = array[2];
+    	var splited = url.split(".");
+    	var oResult = {
+    		"localFile": array[1] + "." + splited[splited.length-1],
+    		"fileUrl": url
+    	};
+		aResult.push(oResult);
+		return aResult;
+	};
+	req.on('data', function (data) {
+            body += data;
+            if (body.length > 1e6)
+                request.connection.destroy();
+        });
 
-app.get("/products", function(req, res){
-  Product.find(function(err, products){
-    res.send({data: products});
-  })
-})
-
-app.post("/products", function(req, res){
- // console.log(req);
-  console.log(req.body);
-  var name = req.body.name;
-
-  var product = new Product ({name: name});
-  product.save(function(err){
-    if(err){
-      console.log("failed");
-    } else {
-      console.log("saved");
-      res.json({msg: "Product saved"});
-      res.status(201);
-      res.send();
-
-    }
-
-  })
-})
-
-app.listen(process.env.PORT || 3000);
-
-//app.use(express.static(__dirname));
+    req.on('end', function () {
+            var post = qs.parse(body);
+            var aResult = [];
+            // res.send("your request is: " + post.markdown_source);
+            while ((m = regex.exec(post.markdown_source)) !== null) {
+    			if (m.index === regex.lastIndex) {
+        			regex.lastIndex++;
+    			}
+    			aResult = aResult.concat(printResult(m));
+    		}
+    		console.log(aResult);
+    		res.json(aResult);
+    	});
+	});
+app.listen(process.env.PORT || 3000, function(){
+     console.log("Example app listens on port 3000.");
+});
