@@ -20,7 +20,7 @@ else {
 mongoose.connect(dbString);
 //app.use(cors());
 app.use(bodyParser());
-app.use('/ui5', express.static(path.join(__dirname, 'webapp')));
+
 app.use(bodyParser.urlencoded({ extended: true }))
 var Product = mongoose.model("products", {
   name: String
@@ -36,13 +36,14 @@ product.save(function(err){
 });
 */
 
-
+/*
 app.get('/', (req, res) => {
    const index = path.join(__dirname, 'index.html');
    res.sendFile(index);
   // Note: __dirname is directory that contains the JavaScript source code. Try logging it and see what you get!
   // Mine was '/Users/zellwk/Projects/demo-repos/crud-express-mongo' for this app.
 });
+*/
 
 
 app.get("/products", function(req, res){
@@ -64,6 +65,7 @@ app.post("/products", function(req, res){
       console.log("saved");
       res.json({msg: "Product saved"});
       res.status(201);
+     
       res.send();
 
     }
@@ -73,4 +75,5 @@ app.post("/products", function(req, res){
 
 app.listen(process.env.PORT || 3000);
 
-//app.use(express.static(__dirname));
+app.use(express.static(__dirname));
+app.use('/ui5', express.static(path.join(__dirname, 'webapp')));
