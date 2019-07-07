@@ -76,6 +76,32 @@ sap.ui.define([
 var dataModel = this.getOwnerComponent().getModel("tableData");
 			this.getView().setModel(dataModel, "Beers");
 
+			
+			var oModel = new JSONModel();
+			this.getView().setModel(oModel, "mongo");
+			debugger;
+			this.refresh()
+
+		},
+
+		
+		refresh: function () {
+			debugger;
+			var oModel = this.getView().getModel("mongo");
+			oModel.loadData("http://localhost:3000/products");
+		},
+		addProduct(){
+			var sName = this.getView().byId("addProduct").getValue();
+			var oData = {name: sName};
+			jQuery.ajax({
+				url: "http://localhost:3000/products",
+				dataType: "json",
+				data: oData,
+				type: "post",
+				success: jQuery.proxy(function(oData){
+					this.refresh();
+				},this)
+			});
 		},
 		
 		/*--------------------------------------
