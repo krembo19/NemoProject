@@ -73,4 +73,4 @@ app.post("/products", function(req, res){
 
 app.listen(process.env.PORT || 3000);
 
-app.use(express.static(__dirname));
+//app.use(express.static(__dirname));
