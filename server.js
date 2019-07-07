@@ -77,3 +77,4 @@ app.listen(process.env.PORT || 3000);
 
 app.use(express.static(__dirname));
 app.use('/ui5', express.static(path.join(__dirname, 'webapp')));
+app.use('/comp', express.static(path.join(__dirname, 'Component.js')));
