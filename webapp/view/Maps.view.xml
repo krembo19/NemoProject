@@ -4,35 +4,13 @@
 		<pages>
 			<Page title="{i18n>title}" showFooter="true" showNavButton="true" navButtonPress="onNavBack">
 				<content>
-					<Button press="GoToResult" text="Lead Erfassung"/>
-					<SearchField
-					liveChange="onSearch"
-					width="100%" />
-					<gmaps:Map markers="{Beers>/beers}" height="28.0rem" width="auto" zoom="4" lat="41.850033" lng="-87.6500523"
-						apiKey="AIzaSyCv6OsSNiveQD4lYhHcAMpN5DEDfYaYvGM">
-						<gmaps:markers>
-							<gmaps:Marker lat="{Beers>lat}" lng="{Beers>lng}" info="Bondi Beach"/>
-						</gmaps:markers>
-					</gmaps:Map>
-					<Table id="leadTable" width="auto" class="sapUiSmallMargin" showSeparators="All" growing="true" growingThreshold="20"
-						growingScrollToLoad="false" items="{ path: 'Beers>/beers'}">
-						<columns>
-							<Column minScreenWidth="Tablet" demandPopin="false">
-								<Text text="Fachhaendler"/>
-							</Column>
-							<Column minScreenWidth="Tablet" demandPopin="false">
-								<Text text="Stadt"/>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem id="listItem" type="Active" press="onItemPress">
-								<cells>
-									<Text text="{Beers>brewName}"/>
-									<Text text="{Beers>city}"/>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>
+				
+					<List items="{mongo>/data}">
+					<StandardListItem title ="{mongo>name}"/>
+					</List>
+					<Input id="addProduct"/>
+					<Button text="save" press="addProduct"/>
+
 				</content>
 			</Page>
 		</pages>
