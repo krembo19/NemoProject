@@ -88,13 +88,13 @@ var dataModel = this.getOwnerComponent().getModel("tableData");
 		refresh: function () {
 			debugger;
 			var oModel = this.getView().getModel("mongo");
-			oModel.loadData("https://nemoproject.herokuapp.com/products");
+			oModel.loadData("https://lovely-joshua-tree-24687.herokuapp.com/products");
 		},
 		addProduct(){
 			var sName = this.getView().byId("addProduct").getValue();
 			var oData = {name: sName};
 			jQuery.ajax({
-				url: "https://nemoproject.herokuapp.com/products",
+				url: "https://lovely-joshua-tree-24687.herokuapp.com/products",
 				dataType: "json",
 				data: oData,
 				type: "post",
