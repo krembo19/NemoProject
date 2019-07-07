@@ -1,0 +1,96 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="stobag_lead_cre.Stobag_Lead_Cre.controller.LeadCreation"
+	displayBlock="true" xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartField="sap.ui.comp.smartfield">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}" showNavButton="true" navButtonPress="onNavBack">
+					<content>
+						<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true"
+							layout="ResponsiveGridLayout" id="form0">
+							<sap.ui.layout.form:content>
+								<sap.ui.core:Title text="Ihre Anfrage an den Fachpartner" id="title0"/>
+								<Label text="Vorname" id="firstNameLabel" required="true"/>
+								<Input width="100%" id="firstNameInput"/>
+								<Label text="Nachname" id="lastNameLabel" required="true"/>
+								<Input width="100%" id="lastNameInput"/>
+								<Label text="Strasse" id="streetLabel"/>
+								<Input width="100%" id="streetInput"/>
+								<Label text="Hausnummer" id="houseNumberLabel"/>
+								<Input width="100%" id="houseNumberInput"/>
+								<Label text="PLZ" id="postalCodeLabel" required="true"/>
+								<Input width="100%" id="postalCodeInput"/>
+								<Label text="Ort" id="cityLabel" required="true"/>
+								<Input width="100%" id="cityInput"/>
+								<Label text="Land" id="countryLabel"/>
+								<Input width="100%" id="countryInput"/>
+								<Label text="E-Mail" id="mailLabel" required="true"/>
+								<Input width="100%" id="mailInput"/>
+								<Label text="Telefon" id="phoneLabel"/>
+								<Input width="100%" id="phoneInput"/>
+							</sap.ui.layout.form:content>
+						</sap.ui.layout.form:SimpleForm>
+						<smartForm:SmartForm id="smartForm">
+							<smartForm:Group label="Ich interessiere mich für">
+								<smartForm:GroupElement>
+									<CheckBox text="Bauzaunträger" id="bauzaunCheckbox"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Balkenfussplatten" id="balkenPlaCheckbox"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Kassettenmarkise"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Seitenbeschattung"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Atriumbeschattung"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Pergola-/Terrassenmarkisen"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Verglasungssysteme"/>
+								</smartForm:GroupElement>
+							</smartForm:Group>
+							<smartForm:Group label=" ">
+								<smartForm:GroupElement>
+									<CheckBox text="Fallarm-/Ausstellmarkisen"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Offene Markisen"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Glas-Vordachsystem"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Wintergartenbeschattungen"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Freistehende Beschattungen"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Glasdachsysteme"/>
+								</smartForm:GroupElement>
+								<smartForm:GroupElement>
+									<CheckBox text="Pavillons"/>
+								</smartForm:GroupElement>
+							</smartForm:Group>
+						</smartForm:SmartForm>
+							<sap.ui.layout.form:SimpleForm xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" editable="true"
+							layout="ResponsiveGridLayout" id="form2">
+							<sap.ui.layout.form:content>
+								<sap.ui.core:Title text="Bemerkungen" id="title1"/>
+								<TextArea growing="true" id="note1"/>
+							</sap.ui.layout.form:content>
+						</sap.ui.layout.form:SimpleForm>
+					</content>
+					<footer>
+						<OverflowToolbar>
+							<ToolbarSpacer/>
+							<Button id="button01" text="Absenden" press="saveData"/>
+						</OverflowToolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+</mvc:View>

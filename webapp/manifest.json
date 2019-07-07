@@ -1,0 +1,139 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "stobag_lead_cre.Stobag_Lead_Cre",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"c4codataapi": {
+				"uri": "/V11C4C/sap/c4c/odata/v1/c4codataapi/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml",
+					"annotations": []
+				}
+			},
+			"tableData_alias": {
+				"uri": "model/mock.json",
+				"type": "JSON"
+			}
+		
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"resourceRoots": {
+			 "openui5": "./thirdparty/openui5/"
+		},
+		"rootView": {
+			"viewName": "stobag_lead_cre.Stobag_Lead_Cre.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "V_Root"
+		},
+		"dependencies": {
+			"minUI5Version": "1.60.1",
+			"libs": {
+				"sap.ui.layout": {},
+				"sap.ui.core": {},
+				"sap.m": {},
+				"openui5.googlemaps": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "stobag_lead_cre.Stobag_Lead_Cre.i18n.i18n"
+				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Client",
+					"defaultBindingMode": "TwoWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "c4codataapi",
+				"preload": true
+			},
+			"tableData": {
+				"type": "sap.ui.model.json.JSONModel",
+				"dataSource": "tableData_alias"
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"async": true,
+				"viewPath": "stobag_lead_cre.Stobag_Lead_Cre.view",
+				"controlAggregation": "pages",
+				"controlId": "V_Root",
+				"clearControlAggregation": false,
+				"viewLevel": 1
+			},
+			"routes": [{
+				"name": "TargetMaps",
+				"pattern": "",
+				"titleTarget": "",
+				"greedy": false,
+				"target": ["TargetMaps"]
+			}, {
+				"name": "TargetLeadCreation",
+				"pattern": "RouteLeadCreation",
+				"target": ["TargetLeadCreation"]
+			}],
+			"targets": {
+				"TargetLeadCreation": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewId": "",
+					"viewName": "LeadCreation",
+					"viewLevel": 2
+				},
+				"TargetMaps": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearControlAggregation": false,
+					"viewName": "Maps",
+					"viewLevel": 1
+				}
+			}
+		}
+	}
+}
