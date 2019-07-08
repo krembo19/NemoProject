@@ -2,14 +2,14 @@
 	controllerName="stobag_lead_cre.Stobag_Lead_Cre.controller.Maps" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="{i18n>title}" showFooter="true" showNavButton="true" navButtonPress="onNavBack">
+			<Page title="Nemo Project" showFooter="true" showNavButton="true" navButtonPress="onNavBack">
 				<content>
 				
 					<List items="{mongo>/data}">
 					<StandardListItem title ="{mongo>name}"/>
 					</List>
 					<Input id="addProduct"/>
-					<Button text="save" press="addProduct"/>
+					<Button text="Save" press="addProduct"/>
 
 				</content>
 			</Page>
