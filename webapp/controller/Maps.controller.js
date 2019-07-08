@@ -89,7 +89,7 @@ var dataModel = this.getOwnerComponent().getModel("tableData");
 			debugger;
 			var oModel = this.getView().getModel("mongo");
 			oModel.loadData("https://nemoproject.herokuapp.com/products");
-			this.getView().byId("text-input").setValue("");
+			this.getView().byId("addProduct").setValue("");
 		},
 		addProduct(){
 			var sName = this.getView().byId("addProduct").getValue();
