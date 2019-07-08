@@ -9,7 +9,7 @@
 					<StandardListItem title ="{mongo>name}"/>
 					</List>
 					<Input id="addProduct"/>
-					<Button text="Save" press="addProduct"/>
+					<Button id="text-input" text="Save" press="addProduct"/>
 
 				</content>
 			</Page>
