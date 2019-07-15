@@ -68,7 +68,7 @@ sap.ui.define([
 			 var util = openui5.googlemaps.MapUtils;
 		
 			 $.ajax({
-				url: "https://nemoproject.herokuapp.com/products",
+				url: "https://services.odata.org/V2/Northwind/Northwind.svc/",
 				type: 'GET',
 				success: () => {
 					alert("success");
