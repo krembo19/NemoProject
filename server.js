@@ -1,9 +1,10 @@
-var express = require("express");
+const express = require("express");
+var cors = require('cors');
 var app = express();
 const path = require('path');
 //var cors = require("cors");
 var bodyParser = require("body-parser");
-
+app.use(cors());
 var mongoose = require("mongoose");
 const dbURL = "mongodb://heroku_gkktb1k2:qn6smi3o6nt6vcjc37u88t5im@ds247637.mlab.com:47637/heroku_gkktb1k2";
 let port = process.env.PORT;
@@ -18,13 +19,19 @@ else {
 }
 
 mongoose.connect(dbString);
-//app.use(cors());
-app.use(bodyParser());
-app.use('/ui5', express.static(path.join(__dirname, 'webapp')));
-app.use(bodyParser.urlencoded({ extended: true }))
-var Product = mongoose.model("products", {
-  name: String
-});
+
+const options = {
+  origin: true,
+  "Access-Control-Allow-Credentials": true,
+
+  "Access-Control-Allow-Origin": true,
+  "Access-Control-Allow-Headers": true,
+  "Access-Control-Expose-Headers": true
+};
+
+
+app.use(cors(options));
+app.options('*', cors()); 
 /*
 var product = new Product({name:"UI5Con"});
 product.save(function(err){
@@ -36,7 +43,6 @@ product.save(function(err){
 });
 */
 
-
 app.get('/', (req, res) => {
    const index = path.join(__dirname, 'index.html');
    res.sendFile(index);
@@ -46,6 +52,7 @@ app.get('/', (req, res) => {
 
 
 app.get("/products", function(req, res){
+  
   Product.find(function(err, products){
     res.send({data: products});
   })
@@ -70,6 +77,33 @@ app.post("/products", function(req, res){
 
   })
 })
+
+app.options('/ui5', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.sendStatus(200);
+});
+app.use('/ui5', express.static(path.join(__dirname, 'webapp')));
+
+app.use(bodyParser.urlencoded({ extended: true }))
+var Product = mongoose.model("products", {
+  name: String
+});
+
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*") //* to give access to any origin
+  res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization" //to give access to all the headers provided
+  );
+  if(req.method === 'OPTIONS'){
+      res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET'); //to give access to all the methods provided
+      return res.status(200).json({});
+  }
+  next(); //so that other routes can take over
+});
 
 app.listen(process.env.PORT || 3000);
 

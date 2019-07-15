@@ -87,9 +87,24 @@ var dataModel = this.getOwnerComponent().getModel("tableData");
 		
 		refresh: function () {
 			debugger;
+
+
+
+			$.get("https://nemoproject.herokuapp.com/products").done(function (data) {
+    console.log(data);
+});
+
+/*
 			var oModel = this.getView().getModel("mongo");
 			oModel.loadData("https://nemoproject.herokuapp.com/products");
 			this.getView().byId("addProduct").setValue("");
+			
+			*/
+			/*
+			var oModel = new sap.ui.model.odata.v2.ODataModel("https://my343873.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/");
+			debugger;
+			*/
+			
 		},
 		addProduct(){
 			var sName = this.getView().byId("addProduct").getValue();
