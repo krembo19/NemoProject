@@ -46,7 +46,6 @@ sap.ui.define([
 		
 		onSearch: function(oEvent){
 			
-			debugger;
 			 var util = openui5.googlemaps.MapUtils;
 			var para = oEvent;
 			
@@ -79,7 +78,7 @@ var dataModel = this.getOwnerComponent().getModel("tableData");
 			
 			var oModel = new JSONModel();
 			this.getView().setModel(oModel, "mongo");
-			debugger;
+		
 			this.refresh()
 
 		},
