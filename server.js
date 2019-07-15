@@ -34,14 +34,13 @@ var username = "c4c-admin-user",
 
 auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
 
-app.get("/cors", function(req, res){
-  
+app.get("/cors", function(req, response){
   request('https://my343873.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/', { json: true,
 headers : {"Authorization": auth} }, (err, res, body) => {
   if (err) { return console.log(err); }
   console.log(body.url);
   console.log(body.explanation);
-  res.send(body);
+  response.send(body);
 });
 
 })
