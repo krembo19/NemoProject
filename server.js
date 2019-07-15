@@ -28,8 +28,8 @@ app.get('/', (req, res) => {
   // Note: __dirname is directory that contains the JavaScript source code. Try logging it and see what you get!
   // Mine was '/Users/zellwk/Projects/demo-repos/crud-express-mongo' for this app.
 });
-var username = "c4c-admin-user",
-    password = "Nik.Bach1";
+var username = "",
+    password = "";
 
 
 auth = "Basic " + new Buffer(username + ":" + password).toString("base64");
