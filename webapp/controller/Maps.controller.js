@@ -68,7 +68,7 @@ sap.ui.define([
 			 var util = openui5.googlemaps.MapUtils;
 		
 			 $.ajax({
-				url: "https://reqres.in/api/users",
+				url: "https://my343873.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/",
 				type: 'GET',
 				success: () => {
 					alert("success");
