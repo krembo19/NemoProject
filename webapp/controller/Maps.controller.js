@@ -67,7 +67,16 @@ sap.ui.define([
 		
 			 var util = openui5.googlemaps.MapUtils;
 		
-		
+			 $.ajax({
+				url: "https://nemoproject.herokuapp.com/products",
+				type: 'GET',
+				success: () => {
+					alert("success");
+				},
+				error: () => {
+					alert("error");
+				}
+			  });
         
        
     
