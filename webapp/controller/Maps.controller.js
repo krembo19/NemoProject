@@ -86,17 +86,9 @@ var dataModel = this.getOwnerComponent().getModel("tableData");
 
 		
 		refresh: function () {
-			debugger;
-
-
-
-			$.get("https://nemoproject.herokuapp.com/products").done(function (data) {
-    console.log(data);
-});
-
 
 			var oModel = this.getView().getModel("mongo");
-			oModel.loadData("https://lovely-joshua-tree-24687.herokuapp.com");
+			oModel.loadData("https://lovely-joshua-tree-24687.herokuapp.com/products");
 			this.getView().byId("addProduct").setValue("");
 			
 			
