@@ -63,8 +63,7 @@ sap.ui.define([
 	
 		 
 		onInit: function () {
-		
-		
+			
 			 var util = openui5.googlemaps.MapUtils;
 		
 			 $.ajax({
