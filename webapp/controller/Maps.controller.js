@@ -94,12 +94,12 @@ var dataModel = this.getOwnerComponent().getModel("tableData");
     console.log(data);
 });
 
-/*
+
 			var oModel = this.getView().getModel("mongo");
-			oModel.loadData("https://nemoproject.herokuapp.com/products");
+			oModel.loadData("https://lovely-joshua-tree-24687.herokuapp.com");
 			this.getView().byId("addProduct").setValue("");
 			
-			*/
+			
 			/*
 			var oModel = new sap.ui.model.odata.v2.ODataModel("https://my343873.crm.ondemand.com/sap/c4c/odata/v1/c4codataapi/");
 			debugger;
